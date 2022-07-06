@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfCinema"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="900">
     <Grid>
         <TabControl>
             <TabItem Header="Dane">
@@ -31,19 +31,20 @@
             Dodaj film
                     </TextBlock>
                     <Label Grid.Row="1">Tytuł:</Label>
-                    <TextBox Grid.Row="1" Grid.Column="1"/>
+                    <TextBox Name="movieTitle" Grid.Row="1" Grid.Column="1"/>
                     <Label Grid.Row="2">Czas trwania:</Label>
-                    <TextBox Grid.Row="2" Grid.Column="1"/>
+                    <TextBox Name="movieDuration" Grid.Row="2" Grid.Column="1"/>
                     <Label Grid.Row="3">Opis:</Label>
-                    <TextBox Grid.Row="3" Grid.Column="1"/>
+                    <TextBox Name="movieDesc" Grid.Row="3" Grid.Column="1"/>
                     <Label Grid.Row="4">Kategoria:</Label>
-                    <ComboBox Grid.Row="4" Grid.Column="1" Name="ComboBox1" HorizontalAlignment="Left" VerticalAlignment="Top" Width="250" Height="30" ItemsSource="{Binding Id}" DisplayMemberPath="Name" SelectedValuePath="Name"/>
+                    <ComboBox Grid.Row="4" Grid.Column="1" Name="categorySelector" HorizontalAlignment="Left" VerticalAlignment="Top" Width="250" Height="30" ItemsSource="{Binding Id}" DisplayMemberPath="Name" SelectedValuePath="Id"/>
                     <DataGrid Name="gridMovies" AutoGenerateColumns="False" Grid.ColumnSpan="3" Margin="10,10,48,-10" Grid.Row="7">
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="30" Header="Id" Binding="{Binding Id}" CanUserResize="False"></DataGridTextColumn>
                             <DataGridTextColumn Width="100" Header="Tytuł" Binding="{Binding Title}" CanUserResize="False"></DataGridTextColumn>
-                            <DataGridTextColumn Width="140" Header="Opis" Binding="{Binding Description}" CanUserResize="False"></DataGridTextColumn>
-                            <DataGridTextColumn Width="80" Header="Kategoria" Binding="{Binding Category}" CanUserResize="False"></DataGridTextColumn>
+                            <DataGridTextColumn Width="80" Header="Czas trwania" Binding="{Binding Duration}" CanUserResize="False"></DataGridTextColumn>
+                            <DataGridTextColumn Width="120" Header="Opis" Binding="{Binding Description}" CanUserResize="False"></DataGridTextColumn>
+                            <DataGridTextColumn Width="80" Header="Kategoria" Binding="{Binding CategoryNavigation.Name}" CanUserResize="False"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
 
@@ -51,7 +52,7 @@
             Dodaj kategorię
                     </TextBlock>
                     <Label Grid.Row="1" Grid.Column="3">Nazwa:</Label>
-                    <TextBox Grid.Row="1" Grid.Column="4" Margin="0,0,10,26" Grid.RowSpan="2"/>
+                    <TextBox Grid.Row="1" Name="categoryName" Grid.Column="4" Margin="0,0,10,26" Grid.RowSpan="2"/>
                     <DataGrid Grid.Column="4" Grid.Row="3" Name="gridCategories" IsReadOnly="True" FontSize="12" FontFamily="Arial" SelectionMode="Single" AutoGenerateColumns="False" IsSynchronizedWithCurrentItem="True" HorizontalAlignment="Left" VerticalAlignment="Top" MaxWidth="802" MaxHeight="374" SelectionChanged="gridClients_SelectionChanged" Width="240" Margin="0,2,0,0" Grid.RowSpan="2">
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="40" Header="ID" Binding="{Binding Id}" CanUserResize="False"></DataGridTextColumn>
@@ -63,20 +64,27 @@
             Dodaj sale
                     </TextBlock>
                     <Label Grid.Row="7" Grid.Column="3" Margin="0,8,45,-8" >Numer:</Label>
-                    <TextBox Grid.Row="7" Grid.Column="4" Margin="0,8,0,-8"/>
+                    <TextBox Name="hallNumber" Grid.Row="7" Grid.Column="4" Margin="0,8,0,118"/>
                     <Label Grid.Row="7" Grid.Column="3" Margin="0,35,45,-35" >Ilość miejsc:</Label>
-                    <TextBox Grid.Row="7" Grid.Column="4" Margin="0,35,0,-35"/>
-                    <DataGrid Grid.Row="7" Name="gridHalls" AutoGenerateColumns="False" Margin="0,87,232,-87" Grid.ColumnSpan="2" Grid.Column="3">
+                    <TextBox Name="hallSeats" Grid.Row="7" Grid.Column="4" Margin="0,35,0,93"/>
+                    <DataGrid Grid.Row="7" Name="gridHalls" AutoGenerateColumns="False" Margin="0,94,96,-94" Grid.Column="4">
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="60" Header="Numer" Binding="{Binding Number}" CanUserResize="False"></DataGridTextColumn>
                             <DataGridTextColumn Width="100" Header="Liczba miejsc" Binding="{Binding NumberOfSeats}" CanUserResize="False"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
+                    <Button Content="Dodaj" Name="addCategory" Grid.Column="4" HorizontalAlignment="Left" Margin="179,0,0,0" Grid.Row="2" VerticalAlignment="Center" Click="addCategory_Click"/>
+                    <Button Content="Dodaj" Grid.Column="4" Name="addHall" HorizontalAlignment="Left" Margin="179,58,0,0" Grid.Row="7" VerticalAlignment="Top" Click="addHall_Click"/>
+                    <Button Content="Dodaj" Name="addMovie" Grid.Column="1" HorizontalAlignment="Left" Margin="186,12,0,0" Grid.RowSpan="2" Grid.Row="5" VerticalAlignment="Top" Click="addMovie_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Seanse" >
                 <Grid>
-
+                    <TextBlock FontSize="18" FontWeight="Bold" FontStyle="Italic" Margin="0,0,693,377">
+                    Dodaj Seans
+                    </TextBlock>
+                    <Label Margin="4,34,793,347" Content="Data seansu" />
+                    <DatePicker Margin="90,34,651,347"/>
                 </Grid>
             </TabItem>
         </TabControl>
