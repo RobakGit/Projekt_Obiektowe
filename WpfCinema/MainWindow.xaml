@@ -11,39 +11,44 @@
             <TabItem Header="Dane">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="250" />
-                        <ColumnDefinition Width="80"/>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="250" />
+                        <ColumnDefinition Width="430" />
+                        <ColumnDefinition Width="60" />
+                        <ColumnDefinition Width="410"/>
                     </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <TextBlock 
+                    
+                    <Grid Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="250" />
+                            <ColumnDefinition Width="80"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <TextBlock 
                         FontSize="18" 
                         FontWeight="Bold" 
                         FontStyle="Italic"
                     >
                         Dodaj film
                     </TextBlock>
-                    
+
                     <Label Grid.Row="1">Tytuł:</Label>
                     <TextBox Name="movieTitle" Grid.Row="1" Grid.Column="1"/>
-                    
+
                     <Label Grid.Row="2">Czas trwania:</Label>
                     <TextBox Name="movieDuration" Grid.Row="2" Grid.Column="1"/>
-                    
+
                     <Label Grid.Row="3">Opis:</Label>
                     <TextBox Name="movieDesc" Grid.Row="3" Grid.Column="1"/>
-                    
+
                     <Label Grid.Row="4">Kategoria:</Label>
                     <ComboBox 
                         Grid.Row="4" 
@@ -60,9 +65,7 @@
                         Content="Dodaj" 
                         Name="addMovie" 
                         Grid.Column="1" 
-                        HorizontalAlignment="Left" 
-                        Margin="186,12,0,0"
-                        Grid.RowSpan="2"
+                        HorizontalAlignment="Right" 
                         Grid.Row="5"
                         VerticalAlignment="Top"
                         Click="addMovie_Click"
@@ -72,14 +75,13 @@
                         Name="gridMovies" 
                         AutoGenerateColumns="False" 
                         Grid.ColumnSpan="3" 
-                        Margin="10,10,48,-10" 
                         Grid.Row="7" 
                         Height="150" 
                         CanUserAddRows="false"
                         IsReadOnly="True"
                         SelectionMode="Single"
                         HorizontalScrollBarVisibility="Hidden"
-                        MouseDoubleClick="MovieRow_DoubleClick"
+                        MouseDoubleClick="MovieRow_DoubleClick" Margin="0,20,0,-20"
                     >
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="30" Header="Id" Binding="{Binding Id}" CanUserResize="False"></DataGridTextColumn>
@@ -89,9 +91,28 @@
                             <DataGridTextColumn Width="80" Header="Kategoria" Binding="{Binding CategoryNavigation.Name}" CanUserResize="False"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
+                </Grid>
 
-                    <TextBlock 
-                        Grid.Column="3" 
+                    <Grid Grid.Column="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="250" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        
+                        <TextBlock 
+                        Grid.Column="0" 
                         FontSize="18" 
                         FontWeight="Bold" 
                         FontStyle="Italic"
@@ -99,21 +120,20 @@
                         Dodaj kategorię
                     </TextBlock>
                     
-                    <Label Grid.Row="1" Grid.Column="3">Nazwa:</Label>
-                    <TextBox Grid.Row="1" Name="categoryName" Grid.Column="4" Margin="0,0,10,26" Grid.RowSpan="2"/>
+                    <Label Grid.Row="1" Grid.Column="0">Nazwa:</Label>
+                        <TextBox Grid.Row="1" Name="categoryName" Grid.Column="1" Width="250" HorizontalAlignment="Left"/>
                     <Button 
                         Content="Dodaj"
                         Name="addCategory"
-                        Grid.Column="4"
-                        HorizontalAlignment="Left" 
-                        Margin="210,0,0,0"
+                        Grid.Column="1"
+                        HorizontalAlignment="Right" 
                         Grid.Row="2"
                         VerticalAlignment="Center" 
                         Click="addCategory_Click"
                     />
 
                     <DataGrid 
-                        Grid.Column="4" 
+                        Grid.Column="1" 
                         Grid.Row="3"
                         Name="gridCategories"
                         IsReadOnly="True" 
@@ -123,15 +143,16 @@
                         AutoGenerateColumns="False"
                         CanUserAddRows="false"
                         Height="100"
-                        Width="240"
-                        Margin="0,2,0,0"
+                        Width="250"
+                        HorizontalAlignment="Left"
                         Grid.RowSpan="2"
                         HorizontalScrollBarVisibility="Hidden"
                         MouseDoubleClick="CategoryRow_DoubleClick"
+                        Margin="0, 10"
                     >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Width="40" Header="ID" Binding="{Binding Id}" CanUserResize="False"></DataGridTextColumn>
-                            <DataGridTextColumn Width="180" Header="Name" Binding="{Binding Name}" CanUserResize="False"></DataGridTextColumn>
+                            <DataGridTextColumn Width="50" Header="ID" Binding="{Binding Id}" CanUserResize="False"></DataGridTextColumn>
+                            <DataGridTextColumn Width="200" Header="Name" Binding="{Binding Name}" CanUserResize="False"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
 
@@ -140,76 +161,76 @@
                         FontSize="18"
                         FontWeight="Bold"
                         FontStyle="Italic" 
-                        Grid.Column="3" 
-                        Margin="0,8,45,2"
-                        Grid.RowSpan="2"
                     >
                         Dodaj sale
                     </TextBlock>
                     
-                    <Label Grid.Row="7" Grid.Column="3" Margin="0,8,45,-8" >Numer:</Label>
-                    <TextBox Name="hallNumber" Grid.Row="7" Grid.Column="4" Margin="0,8,0,118"/>
+                    <Label Grid.Row="6"  >Numer:</Label>
+                        <TextBox Name="hallNumber" Grid.Row="6" Grid.Column="1" Width="250" HorizontalAlignment="Left" />
                     
-                    <Label Grid.Row="7" Grid.Column="3" Margin="0,35,45,-35" >Ilość miejsc:</Label>
-                    <TextBox Name="hallSeats" Grid.Row="7" Grid.Column="4" Margin="0,35,0,93"/>
+                    <Label Grid.Row="7"  >Ilość miejsc:</Label>
+                    <TextBox Name="hallSeats" Grid.Row="7" Grid.Column="1" Width="250" HorizontalAlignment="Left"/>
                     <Button 
                         Content="Dodaj"
-                        Grid.Column="4"
+                        Grid.Column="1"
                         Name="addHall" 
-                        HorizontalAlignment="Left" 
-                        Margin="210,0,0,0" 
-                        Grid.Row="7" 
+                        HorizontalAlignment="Right" 
+                        Grid.Row="8" 
                         VerticalAlignment="Center" 
                         Click="addHall_Click"
                     />
 
                     <DataGrid 
-                        Grid.Row="7" 
+                        Grid.Row="9" 
                         Name="gridHalls"
                         AutoGenerateColumns="False"
-                        Margin="135,76,96,-30" 
-                        Grid.Column="3"
-                        Grid.ColumnSpan="2" 
+                        Grid.Column="1"
                         Height="100"
+                        Width="180"
                         CanUserAddRows="false"
                         IsReadOnly="True"
                         SelectionMode="Single"
                         HorizontalScrollBarVisibility="Hidden"
-                        MouseDoubleClick="HallRow_DoubleClick"
+                        MouseDoubleClick="HallRow_DoubleClick" Margin="35,20,35,-20"
                     >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Width="60" Header="Numer" Binding="{Binding Number}" CanUserResize="False"></DataGridTextColumn>
+                            <DataGridTextColumn Width="80" Header="Numer" Binding="{Binding Number}" CanUserResize="False"></DataGridTextColumn>
                             <DataGridTextColumn Width="100" Header="Liczba miejsc" Binding="{Binding NumberOfSeats}" CanUserResize="False"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
-                    
+                    </Grid>
                 </Grid>
             </TabItem>
             <TabItem Header="Seanse" >
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="250" />
-                        <ColumnDefinition Width="80"/>
-                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="350" />
+                        <ColumnDefinition Width="80" />
+                        <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    
-                    <TextBlock FontSize="18" FontWeight="Bold" FontStyle="Italic">
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock FontSize="18" FontWeight="Bold" FontStyle="Italic">
                         Dodaj Seans
                     </TextBlock>
                     
                     <Label Grid.Row="2" Content="Data seansu" />
-                    <DatePicker Name="screeningDate" Grid.Row="2" Grid.Column="1"/>
+                    <DatePicker Name="screeningDate" Grid.Row="2" Grid.Column="1" Width="240"/>
                     
                     <Label Grid.Row="3" Content="Godzina seansu" />
                     <TextBox  Name="screeningTime" Grid.Row="3" Grid.Column="1"/>
@@ -219,9 +240,11 @@
                     
                     <Label Grid.Row="5" Content="Sala" />
                     <ComboBox Grid.Row="5" Grid.Column="1" Name="hallSelector" DisplayMemberPath="Number" SelectedValuePath="Number"/>
-                    
-                    <Button Grid.Row="6" Grid.Column="1" Content="Dodaj" Click="Button_Click"/>
 
+                        <Button Grid.Row="6" Grid.Column="1" Content="Dodaj" HorizontalAlignment="Right" VerticalAlignment="Top" Click="Button_Click"/>
+                    </Grid>
+
+                    <Grid Grid.Column="2">
                     <DataGrid 
                         Grid.Row="4" 
                         Name="gridScreenings"
@@ -240,6 +263,7 @@
                             <DataGridTextColumn Width="140" Header="Koniec" Binding="{Binding EndedAt}" CanUserResize="False"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
+                    </Grid>
                 </Grid>
             </TabItem>
         </TabControl>
