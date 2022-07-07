@@ -40,9 +40,14 @@ namespace WpfCinema
 
             List<Movie> movies = db.Movies.ToList();
             gridMovies.ItemsSource = movies;
+            movieSelector.ItemsSource = movies;
 
             List<Hall> halls = db.Halls.ToList();
             gridHalls.ItemsSource = halls;
+            hallSelector.ItemsSource = halls;
+
+            List<Screening> screenings = db.Screenings.ToList();
+            gridScreenings.ItemsSource = screenings;
 
             movies.ForEach(i => Trace.WriteLine(i));
         }
@@ -86,6 +91,23 @@ namespace WpfCinema
                 categoryId = int.Parse(categorySelector.SelectedValue.ToString());
                 var newMovie = new Movie { Title = movieTitle.Text, Duration = duration, Description = movieDesc.Text, Category = categoryId };
                 db.Add<Movie>(newMovie);
+                db.SaveChanges();
+
+                UpdateData();
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if(movieSelector.SelectedValue != null && hallSelector.SelectedValue != null && screeningTime.Text != "" && screeningDate.SelectedDate != null) {
+                int movieId = int.Parse(movieSelector.SelectedValue.ToString());
+                int hallId = int.Parse(hallSelector.SelectedValue.ToString());
+                TimeSpan time = TimeSpan.Parse(screeningTime.Text);
+                DateTime? dtScreening = screeningDate.SelectedDate + time;
+                DateTime? endAt = dtScreening + db.Movies.Find(movieId).Duration;
+
+                var newScreening = new Screening { Movie = movieId, Hall = hallId, StartedAt = dtScreening, EndedAt = endAt};
+                db.Add<Screening>(newScreening);
                 db.SaveChanges();
 
                 UpdateData();
