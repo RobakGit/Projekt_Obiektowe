@@ -64,6 +64,17 @@ namespace WpfCinema
             }
         }
 
+        private void CategoryRow_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (gridCategories.SelectedItem == null) return;
+
+            var selectedCategory = gridCategories.SelectedItem as Category;
+            db.Categories.Remove(selectedCategory);
+            db.SaveChanges();
+
+            UpdateData();
+        }
+
         private void addHall_Click(object sender, RoutedEventArgs e)
         {
             Regex regex = new Regex("^\\d*$");
@@ -75,6 +86,17 @@ namespace WpfCinema
 
                 UpdateData();
             }
+        }
+
+        private void HallRow_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (gridHalls.SelectedItem == null) return;
+
+            var selectedHall = gridHalls.SelectedItem as Hall;
+            db.Halls.Remove(selectedHall);
+            db.SaveChanges();
+
+            UpdateData();
         }
 
         private void addMovie_Click(object sender, RoutedEventArgs e)
@@ -93,6 +115,23 @@ namespace WpfCinema
             }
         }
 
+        private void MovieRow_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (gridMovies.SelectedItem == null) return;
+
+            var selectedMovie = gridMovies.SelectedItem as Movie;
+            if (db.Screenings.FirstOrDefault(sc => sc.Movie == selectedMovie.Id) != null) 
+            {
+                MessageBox.Show("Istnieje już seans na ten film", "Istniejąca relacja", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
+
+            db.Movies.Remove(selectedMovie);
+            db.SaveChanges();
+
+            UpdateData();
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             if(movieSelector.SelectedValue != null && hallSelector.SelectedValue != null && screeningTime.Text != "" && timeRegex.IsMatch(screeningTime.Text) && screeningDate.SelectedDate != null) {
@@ -108,6 +147,17 @@ namespace WpfCinema
 
                 UpdateData();
             }
+        }
+
+        private void ScreeningRow_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (gridScreenings.SelectedItem == null) return;
+
+            var selectedScreening = gridScreenings.SelectedItem as Screening;
+            db.Screenings.Remove(selectedScreening);
+            db.SaveChanges();
+
+            UpdateData();
         }
     }
 }

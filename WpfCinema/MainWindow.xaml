@@ -75,7 +75,11 @@
                         Margin="10,10,48,-10" 
                         Grid.Row="7" 
                         Height="150" 
+                        CanUserAddRows="false"
+                        IsReadOnly="True"
+                        SelectionMode="Single"
                         HorizontalScrollBarVisibility="Hidden"
+                        MouseDoubleClick="MovieRow_DoubleClick"
                     >
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="30" Header="Id" Binding="{Binding Id}" CanUserResize="False"></DataGridTextColumn>
@@ -117,14 +121,13 @@
                         FontFamily="Arial"
                         SelectionMode="Single"
                         AutoGenerateColumns="False"
-                        IsSynchronizedWithCurrentItem="True"
-                        HorizontalAlignment="Left" 
-                        VerticalAlignment="Top" 
+                        CanUserAddRows="false"
                         Height="100"
                         Width="240"
                         Margin="0,2,0,0"
                         Grid.RowSpan="2"
                         HorizontalScrollBarVisibility="Hidden"
+                        MouseDoubleClick="CategoryRow_DoubleClick"
                     >
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="40" Header="ID" Binding="{Binding Id}" CanUserResize="False"></DataGridTextColumn>
@@ -168,7 +171,11 @@
                         Grid.Column="3"
                         Grid.ColumnSpan="2" 
                         Height="100"
+                        CanUserAddRows="false"
+                        IsReadOnly="True"
+                        SelectionMode="Single"
                         HorizontalScrollBarVisibility="Hidden"
+                        MouseDoubleClick="HallRow_DoubleClick"
                     >
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="60" Header="Numer" Binding="{Binding Number}" CanUserResize="False"></DataGridTextColumn>
@@ -215,7 +222,17 @@
                     
                     <Button Grid.Row="6" Grid.Column="1" Content="Dodaj" Click="Button_Click"/>
 
-                    <DataGrid Grid.Row="4" Name="gridScreenings" AutoGenerateColumns="False" Grid.Column="3" Height="200px">
+                    <DataGrid 
+                        Grid.Row="4" 
+                        Name="gridScreenings"
+                        AutoGenerateColumns="False"
+                        Grid.Column="3" 
+                        Height="200px"
+                        MouseDoubleClick="ScreeningRow_DoubleClick"
+                        CanUserAddRows="false"
+                        IsReadOnly="True"
+                        SelectionMode="Single"
+                    >
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="100" Header="Film" Binding="{Binding MovieNavigation.Title}" CanUserResize="False"></DataGridTextColumn>
                             <DataGridTextColumn Width="50" Header="Sala" Binding="{Binding Hall}" CanUserResize="False"></DataGridTextColumn>
