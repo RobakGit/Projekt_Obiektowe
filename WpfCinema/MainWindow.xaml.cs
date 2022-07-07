@@ -24,6 +24,7 @@ namespace WpfCinema
     public partial class MainWindow : Window
     {
         wpfCinemaContext db = new wpfCinemaContext();
+        Regex timeRegex = new Regex("(^\\d{1,2}:\\d{1,2}$)|(^\\d{1,2}:\\d{1,2}:\\d{1,2}$)");
         public MainWindow()
         {
             InitializeComponent();
@@ -49,43 +50,38 @@ namespace WpfCinema
             List<Screening> screenings = db.Screenings.ToList();
             gridScreenings.ItemsSource = screenings;
 
-            movies.ForEach(i => Trace.WriteLine(i));
-        }
-
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void gridClients_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
 
         private void addCategory_Click(object sender, RoutedEventArgs e)
         {
-            var newCategory = new Category { Name = categoryName.Text};
-            db.Add<Category>(newCategory);
-            db.SaveChanges();
+            if (categoryName.Text != "")
+            {
+                var newCategory = new Category { Name = categoryName.Text };
+                db.Add<Category>(newCategory);
+                db.SaveChanges();
 
-            UpdateData();
+                UpdateData();
+            }
         }
 
         private void addHall_Click(object sender, RoutedEventArgs e)
         {
-            var newHall = new Hall { Number = Int32.Parse(hallNumber.Text), NumberOfSeats = Int32.Parse(hallSeats.Text) };
-            db.Add<Hall>(newHall);
-            db.SaveChanges();
+            Regex regex = new Regex("^\\d*$");
+            if (hallNumber.Text != "" && hallSeats.Text != "" && regex.IsMatch(hallNumber.Text) && regex.IsMatch(hallSeats.Text) && db.Halls.Find(Int32.Parse(hallNumber.Text)) == null)
+            {
+                var newHall = new Hall { Number = Int32.Parse(hallNumber.Text), NumberOfSeats = Int32.Parse(hallSeats.Text) };
+                db.Add<Hall>(newHall);
+                db.SaveChanges();
 
-            UpdateData();
+                UpdateData();
+            }
         }
 
         private void addMovie_Click(object sender, RoutedEventArgs e)
         {
-            Regex regex = new Regex("\\d+:\\d+:\\d");
             TimeSpan duration;
             int categoryId;
-            if (categorySelector.SelectedValue != null && movieDuration.Text != "")
+            if (categorySelector.SelectedValue != null && movieDuration.Text != "" && timeRegex.IsMatch(movieDuration.Text) && movieTitle.Text != "")
             {
                 duration = TimeSpan.Parse(movieDuration.Text);
                 categoryId = int.Parse(categorySelector.SelectedValue.ToString());
@@ -99,7 +95,7 @@ namespace WpfCinema
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if(movieSelector.SelectedValue != null && hallSelector.SelectedValue != null && screeningTime.Text != "" && screeningDate.SelectedDate != null) {
+            if(movieSelector.SelectedValue != null && hallSelector.SelectedValue != null && screeningTime.Text != "" && timeRegex.IsMatch(screeningTime.Text) && screeningDate.SelectedDate != null) {
                 int movieId = int.Parse(movieSelector.SelectedValue.ToString());
                 int hallId = int.Parse(hallSelector.SelectedValue.ToString());
                 TimeSpan time = TimeSpan.Parse(screeningTime.Text);
