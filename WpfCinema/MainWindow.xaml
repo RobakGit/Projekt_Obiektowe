@@ -78,13 +78,12 @@
                         Grid.Row="7" 
                         Height="150" 
                         CanUserAddRows="false"
-                        IsReadOnly="True"
                         SelectionMode="Single"
                         HorizontalScrollBarVisibility="Hidden"
                         MouseDoubleClick="MovieRow_DoubleClick" Margin="0,20,0,-20"
                     >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Width="30" Header="Id" Binding="{Binding Id}" CanUserResize="False"></DataGridTextColumn>
+                            <DataGridTextColumn IsReadOnly="True" Width="30" Header="Id" Binding="{Binding Id}" CanUserResize="False"></DataGridTextColumn>
                             <DataGridTextColumn Width="100" Header="Tytuł" Binding="{Binding Title}" CanUserResize="False"></DataGridTextColumn>
                             <DataGridTextColumn Width="80" Header="Czas trwania" Binding="{Binding Duration}" CanUserResize="False"></DataGridTextColumn>
                             <DataGridTextColumn Width="120" Header="Opis" Binding="{Binding Description}" CanUserResize="False"></DataGridTextColumn>
@@ -92,6 +91,17 @@
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>
+                    <Grid Grid.Column="1">
+                        <Button 
+                            Name="SaveChanges"
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Bottom" 
+                            Click="SaveChanges_Click"
+                            Width="70"
+                        >
+                            <TextBlock>Zapisz<LineBreak/>zmiany</TextBlock>
+                        </Button>
+                    </Grid>
 
                     <Grid Grid.Column="2">
                         <Grid.ColumnDefinitions>
@@ -136,7 +146,6 @@
                         Grid.Column="1" 
                         Grid.Row="3"
                         Name="gridCategories"
-                        IsReadOnly="True" 
                         FontSize="12"
                         FontFamily="Arial"
                         SelectionMode="Single"
@@ -151,7 +160,7 @@
                         Margin="0, 10"
                     >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Width="50" Header="ID" Binding="{Binding Id}" CanUserResize="False"></DataGridTextColumn>
+                            <DataGridTextColumn IsReadOnly="True" Width="50" Header="ID" Binding="{Binding Id}" CanUserResize="False"></DataGridTextColumn>
                             <DataGridTextColumn Width="200" Header="Name" Binding="{Binding Name}" CanUserResize="False"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
@@ -188,16 +197,16 @@
                         Height="100"
                         Width="180"
                         CanUserAddRows="false"
-                        IsReadOnly="True"
                         SelectionMode="Single"
                         HorizontalScrollBarVisibility="Hidden"
                         MouseDoubleClick="HallRow_DoubleClick" Margin="35,20,35,-20"
                     >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Width="80" Header="Numer" Binding="{Binding Number}" CanUserResize="False"></DataGridTextColumn>
+                            <DataGridTextColumn IsReadOnly="True" Width="80" Header="Numer" Binding="{Binding Number}" CanUserResize="False"></DataGridTextColumn>
                             <DataGridTextColumn Width="100" Header="Liczba miejsc" Binding="{Binding NumberOfSeats}" CanUserResize="False"></DataGridTextColumn>
                         </DataGrid.Columns>
                     </DataGrid>
+                        
                     </Grid>
                 </Grid>
             </TabItem>

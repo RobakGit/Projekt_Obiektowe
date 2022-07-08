@@ -159,5 +159,10 @@ namespace WpfCinema
 
             UpdateData();
         }
+
+        private void SaveChanges_Click(object sender, RoutedEventArgs e)
+        {
+            db.SaveChanges();
+        }
     }
 }
